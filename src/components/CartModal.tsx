@@ -37,13 +37,7 @@ export default function CartModal({
       return;
     }
     setError('');
-    setIsProcessing(true);
-
-    // Simulate epic server processing
-    setTimeout(() => {
-      setIsProcessing(false);
-      onCheckoutSuccess(username, cartItems);
-    }, 2000);
+    onCheckoutSuccess(username, cartItems);
   };
 
   return (
@@ -226,20 +220,10 @@ export default function CartModal({
 
                 <button 
                   type="submit"
-                  disabled={isProcessing}
-                  className="w-full mt-2 py-3 bg-primary-mint text-on-primary-mint font-bold rounded-xl btn-glow transition-all flex items-center justify-center gap-2 text-sm disabled:opacity-50"
+                  className="w-full mt-2 py-3 bg-primary-mint text-on-primary-mint font-bold rounded-xl btn-glow transition-all flex items-center justify-center gap-2 text-sm"
                 >
-                  {isProcessing ? (
-                    <>
-                      <div className="w-4 h-4 rounded-full border-2 border-on-primary-mint border-t-transparent animate-spin"></div>
-                      <span>PROVISIONING SERVER...</span>
-                    </>
-                  ) : (
-                    <>
-                      <ShieldCheck size={18} />
-                      <span>SECURE PURCHASE (${total.toFixed(2)})</span>
-                    </>
-                  )}
+                  <ShieldCheck size={18} />
+                  <span>PROCEED TO SECURE CHECKOUT (${total.toFixed(2)})</span>
                 </button>
 
                 <div className="flex items-center gap-1.5 justify-center mt-1 text-[10px] text-text-muted">

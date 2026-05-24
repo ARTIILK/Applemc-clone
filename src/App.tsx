@@ -8,6 +8,7 @@ import {
 import { CartItem, PlayerStats, LiveEvent, Product } from './types';
 import { PRODUCTS, CATEGORIES, LIVE_FEED_EVENTS } from './data';
 import CartModal from './components/CartModal';
+import CheckoutModal from './components/CheckoutModal';
 import Leaderboard from './components/Leaderboard';
 
 const DEFAULT_STATS: PlayerStats = {
@@ -29,6 +30,8 @@ export default function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('ranks');
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [checkoutUsername, setCheckoutUsername] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   
   // Player Stats in memory (linked skin, keys, balance, unlocks)
@@ -672,8 +675,21 @@ export default function App() {
         cartItems={cartItems}
         onUpdateQuantity={handleUpdateCartQuantity}
         onRemoveItem={handleRemoveCartItem}
-        onCheckoutSuccess={handleCheckoutSuccess}
+        onCheckoutSuccess={(usr) => {
+          setCheckoutUsername(usr);
+          setIsCartOpen(false);
+          setIsCheckoutOpen(true);
+        }}
         defaultUsername={stats.username}
+      />
+
+      {/* --- ADVANCED UPI DUAL-PANE CHECKOUT MODAL --- */}
+      <CheckoutModal 
+        isOpen={isCheckoutOpen}
+        onClose={() => setIsCheckoutOpen(false)}
+        cartItems={cartItems}
+        username={checkoutUsername || stats.username}
+        onCheckoutSuccess={handleCheckoutSuccess}
       />
 
       {/* --- INTERACTIVE TICKET MODAL --- */}
