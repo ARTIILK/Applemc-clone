@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Emerald Sanctuary Theme Palette */
+  --color-emerald-bg: #0a1514;
+  --color-emerald-surface: #0a1514;
+  --color-emerald-surface-low: #131e1c;
+  --color-emerald-surface-container: #172220;
+  --color-emerald-surface-high: #212c2b;
+  --color-emerald-surface-highest: #2c3736;
+  --color-emerald-bright: #303b3a;
+
+  --color-primary-mint: #b8eed6;
+  --color-on-primary-mint: #003829;
+  --color-primary-mint-container: #9dd2bb;
+  --color-on-primary-mint-container: #295c4a;
+
+  --color-secondary-mint: #8bd5b9;
+  --color-on-secondary-mint: #00382a;
+  --color-secondary-mint-container: #005c46;
+  --color-on-secondary-mint-container: #87d1b5;
+
+  --color-accent-glow: #b9eed6;
+  --color-text-primary: #d9e5e3;
+  --color-text-muted: #c0c9c3;
+}
+
+/* Custom Scrollbar */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  background: rgba(157, 210, 187, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(157, 210, 187, 0.1);
+}
+
+.glass-panel-heavy {
+  background: rgba(23, 34, 32, 0.7);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(157, 210, 187, 0.15);
+}
+
+.ambient-glow {
+  background: radial-gradient(circle, rgba(184, 238, 214, 0.08) 0%, rgba(10, 21, 20, 0) 70%);
+  pointer-events: none;
+}
+
+.btn-glow:hover {
+  box-shadow: 0 0 20px rgba(184, 238, 214, 0.35);
+}
+
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: rgba(184, 238, 214, 0.3);
+  box-shadow: 0 10px 30px -10px rgba(10, 21, 20, 0.5);
+}
+
