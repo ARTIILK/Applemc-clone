@@ -1,0 +1,334 @@
+{
+  "siteConfig": {
+    "serverName": "EliteMC",
+    "serverIP": "play.elitemc.net",
+    "logo": "https://mc-heads.net/avatar/Elite/128",
+    "discord": "https://discord.gg/elitemc",
+    "currency": ["INR", "USD"],
+    "defaultCurrency": "INR",
+    "theme": {
+      "primary": "#b8eed6",
+      "secondary": "#0a1514",
+      "accent": "#fbbf24",
+      "background": "#0a1514"
+    },
+    "backgroundAnimation": {
+      "enabled": true,
+      "type": "floatingParticles",
+      "density": 80,
+      "speed": 0.4
+    }
+  },
+  "categories": [
+    {
+      "id": "ranks",
+      "name": "Server Ranks",
+      "label": "Server Ranks",
+      "description": "Unlock custom ranks, premium name tags, special prefixes, and permanent sanctuary perks.",
+      "icon": "Shield",
+      "enabled": true
+    },
+    {
+      "id": "keys",
+      "name": "Crate Keys",
+      "label": "Crate Keys",
+      "description": "Purchase digital Crate Keys to open loot crates at play.elitemc.net spawns for rare items.",
+      "icon": "Key",
+      "enabled": true
+    },
+    {
+      "id": "bundles",
+      "name": "Value Bundles",
+      "label": "Value Bundles",
+      "description": "Supercharge your sanctuary journey with combined keys, blocks and cosmetic claims.",
+      "icon": "Gift",
+      "enabled": true
+    },
+    {
+      "id": "cosmetics",
+      "name": "Premium Cosmetics",
+      "label": "Premium Cosmetics",
+      "description": "Glow on the server with spectacular trail elements, particle paths, and wings.",
+      "icon": "Sparkles",
+      "enabled": true
+    },
+    {
+      "id": "tags",
+      "name": "Chat Tags & Prefixes",
+      "label": "Chat Tags & Prefixes",
+      "description": "Show off your personal brand with customized prefixes in the server chat feed.",
+      "icon": "Tag",
+      "enabled": true
+    },
+    {
+      "id": "claims",
+      "name": "Claim Land Expansion",
+      "label": "Claim Land Blocks",
+      "description": "Expand your sanctuary kingdoms with persistent protection claim blocks.",
+      "icon": "Package",
+      "enabled": true
+    },
+    {
+      "id": "utilities",
+      "name": "Account Utilities",
+      "label": "Account Utilities",
+      "description": "Keep your gameplay pristine with unban passes, restore keys, and appeal tickets.",
+      "icon": "Gavel",
+      "enabled": true
+    }
+  ],
+  "products": [
+    {
+      "id": "rank-vip",
+      "name": "VIP Rank",
+      "categoryId": "ranks",
+      "priceINR": 250,
+      "priceUSD": 2.99,
+      "description": "An essential starter rank on EliteMC. Includes a bright green [VIP] name tag, /fly in hubs, and exclusive hub gadget permissions.",
+      "image": "https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?auto=format&fit=crop&w=400&q=80",
+      "featured": false,
+      "stock": "In Stock",
+      "checkoutURL": "#"
+    },
+    {
+      "id": "rank-mvp",
+      "name": "MVP Rank",
+      "categoryId": "ranks",
+      "priceINR": 500,
+      "priceUSD": 5.99,
+      "description": "Our most popular rank! Grants elegant particle trails, 3x offline claim reward blocks, priority server queue slot, and a customized sky-blue cyan prefix.",
+      "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80",
+      "featured": true,
+      "stock": "In Stock",
+      "checkoutURL": "#"
+    },
+    {
+      "id": "rank-elite-rank",
+      "name": "ELITE Rank",
+      "categoryId": "ranks",
+      "priceINR": 999,
+      "priceUSD": 11.99,
+      "description": "For elite champions. Grants persistent keep-inventory inside safety worlds, customizable chat formatting, 5x claim multiplier blocks, and elite armor cosmetic sets.",
+      "image": "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=400&q=80",
+      "featured": false,
+      "stock": "High Demand",
+      "checkoutURL": "#"
+    },
+    {
+      "id": "rank-champion",
+      "name": "CHAMPION Rank",
+      "categoryId": "ranks",
+      "priceINR": 2499,
+      "priceUSD": 29.99,
+      "description": "The absolute pinnacle of privilege on EliteMC Sanctuary. Exclusive gold Champion title prefix, dynamic holographic player shadow companion, and full database unlocks.",
+      "image": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=400&q=80",
+      "featured": true,
+      "stock": "Limited Volume",
+      "checkoutURL": "#"
+    },
+    {
+      "id": "keys-mythic",
+      "name": "5x Mythic Crate Key",
+      "categoryId": "keys",
+      "priceINR": 150,
+      "priceUSD": 1.99,
+      "description": "Unlocks spawn Mythic Crate. Yields ancient weapon attachments, customized claim tools, and glowing interactive particles.",
+      "image": "https://images.unsplash.com/photo-1628157582853-a796fa650a6a?auto=format&fit=crop&w=400&q=80",
+      "featured": false,
+      "stock": "Unlimited",
+      "checkoutURL": "#"
+    },
+    {
+      "id": "keys-ancient",
+      "name": "3x Ancient Crate Key",
+      "categoryId": "keys",
+      "priceINR": 300,
+      "priceUSD": 3.49,
+      "description": "Ancient chest logs. Extreme chance for customized top-grade armor sets, legendary modifiers, and divine scrolls.",
+      "image": "https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&w=400&q=80",
+      "featured": false,
+      "stock": "In Stock",
+      "checkoutURL": "#"
+    },
+    {
+      "id": "keys-divine",
+      "name": "1x Divine Crate Key",
+      "categoryId": "keys",
+      "priceINR": 600,
+      "priceUSD": 6.99,
+      "description": "The ultimate loot chest key. Guarantees top tier ranks or extremely rare companion blocks with a custom cosmetic companion trail.",
+      "image": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=400&q=80",
+      "featured": true,
+      "stock": "Low Stock",
+      "checkoutURL": "#"
+    },
+    {
+      "id": "keys-package",
+      "name": "Mega Keys Bundle (10x Mythic)",
+      "categoryId": "keys",
+      "priceINR": 1200,
+      "priceUSD": 13.99,
+      "description": "Discount wholesale key box. Unlocks massive cosmetic collections inside Spawn, perfect for deep collector traders.",
+      "image": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80",
+      "featured": false,
+      "stock": "Unlimited",
+      "checkoutURL": "#"
+    },
+    {
+      "id": "bundle-starter",
+      "name": "EliteMC Starter Bundle",
+      "categoryId": "bundles",
+      "priceINR": 450,
+      "priceUSD": 5.49,
+      "description": "Perfect kit for new adventurers. Grants 5x Mythic Keys, 1000 Extra Claim Blocks, and high-quality starter tools directly on login.",
+      "image": "https://images.unsplash.com/photo-1513258496099-48168024addd?auto=format&fit=crop&w=400&q=80",
+      "featured": true,
+      "stock": "Only 4 Left!",
+      "checkoutURL": "#"
+    },
+    {
+      "id": "celestial-pack",
+      "name": "Sanctuary Celestial Pack",
+      "categoryId": "bundles",
+      "priceINR": 1500,
+      "priceUSD": 17.99,
+      "description": "Legendary package. Grants 15x Mythic Keys, 5000 Claim Expansion blocks, rare dynamic 'Celestial' aether chat prefix, and custom glowing armor companion.",
+      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80",
+      "featured": true,
+      "stock": "Only 2 Left!",
+      "checkoutURL": "#"
+    },
+    {
+      "id": "cosmetic-wings",
+      "name": "Angelic Neon Wings",
+      "categoryId": "cosmetics",
+      "priceINR": 399,
+      "priceUSD": 4.99,
+      "description": "Glow with magnificent neon wings animated directly behind your Minecraft game profile skin.",
+      "image": "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=400&q=80",
+      "featured": true,
+      "stock": "In Stock",
+      "checkoutURL": "#"
+    },
+    {
+      "id": "cosmetic-halo",
+      "name": "Celestial Halo Ornament",
+      "categoryId": "cosmetics",
+      "priceINR": 249,
+      "priceUSD": 2.99,
+      "description": "An exquisite floating light-ring that floats above your player model. Renders animated sparkling particles.",
+      "image": "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=400&q=80",
+      "featured": false,
+      "stock": "In Stock",
+      "checkoutURL": "#"
+    },
+    {
+      "id": "cosmetic-trail-fire",
+      "name": "Underworld Fire Trail",
+      "categoryId": "cosmetics",
+      "priceINR": 199,
+      "priceUSD": 2.49,
+      "description": "Emits flame particles and lava ripples directly under your player feet as you run around the lobby.",
+      "image": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=400&q=80",
+      "featured": false,
+      "stock": "In Stock",
+      "checkoutURL": "#"
+    },
+    {
+      "id": "tag-og",
+      "name": "[OG] Exclusive Chat Tag",
+      "categoryId": "tags",
+      "priceINR": 99,
+      "priceUSD": 1.19,
+      "description": "Show you are an original veteran player of EliteMC. Elegant retro prefix tag.",
+      "image": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80",
+      "featured": false,
+      "stock": "Unlimited",
+      "checkoutURL": "#"
+    },
+    {
+      "id": "tag-toxic",
+      "name": "[TOXIC] Chat Tag Glow",
+      "categoryId": "tags",
+      "priceINR": 120,
+      "priceUSD": 1.49,
+      "description": "A quirky bright toxic lime green bold chat tag for your player name prefix.",
+      "image": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=400&q=80",
+      "featured": false,
+      "stock": "Unlimited",
+      "checkoutURL": "#"
+    },
+    {
+      "id": "tag-rich",
+      "name": "[RICH] Chat Title Element",
+      "categoryId": "tags",
+      "priceINR": 199,
+      "priceUSD": 2.49,
+      "description": "A luxurious shiny gold animated particle chat prefix tag specifying extreme high prestige.",
+      "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80",
+      "featured": true,
+      "stock": "Limited Volume",
+      "checkoutURL": "#"
+    },
+    {
+      "id": "claim-small",
+      "name": "1,000 Land Protection Blocks",
+      "categoryId": "claims",
+      "priceINR": 199,
+      "priceUSD": 2.49,
+      "description": "Keep your builds safe from greifers. Perfect block size expansion for small to medium estates on the play.elitemc.net Sanctuary server.",
+      "image": "https://images.unsplash.com/photo-1513258496099-48168024addd?auto=format&fit=crop&w=400&q=80",
+      "featured": false,
+      "stock": "In Stock",
+      "checkoutURL": "#"
+    },
+    {
+      "id": "claim-large",
+      "name": "5,000 Land Protection Blocks",
+      "categoryId": "claims",
+      "priceINR": 499,
+      "priceUSD": 5.99,
+      "description": "Build high secure faction kingdoms or sky block houses with 5,000 clean extra structural protecting land blocks.",
+      "image": "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=400&q=80",
+      "featured": true,
+      "stock": "High Demand",
+      "checkoutURL": "#"
+    },
+    {
+      "id": "claim-king",
+      "name": "15,000 Land Protection Blocks",
+      "categoryId": "claims",
+      "priceINR": 1199,
+      "priceUSD": 13.99,
+      "description": "The champion architect value selection. Secure vast landscapes and whole medieval kingdoms safely with 15k blocks.",
+      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80",
+      "featured": false,
+      "stock": "In Stock",
+      "checkoutURL": "#"
+    },
+    {
+      "id": "unban-pass",
+      "name": "Sanctuary Unban Pass",
+      "categoryId": "utilities",
+      "priceINR": 750,
+      "priceUSD": 8.99,
+      "description": "An instant account appeal unban pass. Automatically generates a staff ticket to appeal and restore your game avatar status securely.",
+      "image": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=400&q=80",
+      "featured": false,
+      "stock": "Instant Appeal",
+      "checkoutURL": "#"
+    },
+    {
+      "id": "utility-unban",
+      "name": "Compromised Account Appeal Ticket",
+      "categoryId": "utilities",
+      "priceINR": 500,
+      "priceUSD": 5.99,
+      "description": "Urgent and primary review service. Grants private, fast-track Discord ticket access to restore hijacked account access keys.",
+      "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80",
+      "featured": false,
+      "stock": "Instant Dispatch",
+      "checkoutURL": "#"
+    }
+  ]
+}

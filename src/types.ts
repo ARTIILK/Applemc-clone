@@ -2,14 +2,19 @@ export interface Product {
   id: string;
   name: string;
   description: string;
-  price: number;
-  originalPrice?: number;
-  category: 'ranks' | 'keys' | 'bundles' | 'utilities';
-  perks: string[];
-  image?: string;         // Hotlinked image URL if available
-  iconName?: string;      // Lucide icon name fallback
-  isPopular?: boolean;    // "MOST POPULAR" banner
-  isBestValue?: boolean;  // "BEST VALUE" tag
+  priceINR: number;
+  priceUSD: number;
+  categoryId: string;
+  image?: string;
+  featured?: boolean;
+  stock?: string;
+  checkoutURL?: string;
+  // Compatibility fallbacks and virtual properties
+  price: number; 
+  category: string;
+  perks?: string[];
+  isPopular?: boolean;
+  isBestValue?: boolean;
 }
 
 export interface CartItem {

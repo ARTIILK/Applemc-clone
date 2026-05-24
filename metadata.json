@@ -1,6 +1,6 @@
 {
-  "name": "AppleMC Store",
-  "description": "The official premium store for AppleMC Minecraft Sanctuary server, featuring ranks, keys, bundles, and utilities.",
+  "name": "EliteMC Store",
+  "description": "The official premium store for EliteMC Minecraft Sanctuary server, featuring ranks, keys, bundles, cosmetics, claim blocks, and utilities.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
