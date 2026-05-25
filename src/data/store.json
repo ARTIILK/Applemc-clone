@@ -1,16 +1,16 @@
 {
   "siteConfig": {
-    "serverName": "EliteMC",
-    "serverIP": "play.elitemc.net",
-    "logo": "https://mc-heads.net/avatar/Elite/128",
-    "discord": "https://discord.gg/elitemc",
+    "serverName": "MineBerry",
+    "serverIP": "play.mineberry.net",
+    "logo": "/logo-placeholder.png",
+    "discord": "https://discord.gg/mineberry",
     "currency": ["INR", "USD"],
     "defaultCurrency": "INR",
     "theme": {
-      "primary": "#b8eed6",
-      "secondary": "#0a1514",
-      "accent": "#fbbf24",
-      "background": "#0a1514"
+      "primary": "#38bdf8",
+      "secondary": "#a855f7",
+      "accent": "#f472b6",
+      "background": "#0d0714"
     },
     "backgroundAnimation": {
       "enabled": true,
@@ -32,7 +32,7 @@
       "id": "keys",
       "name": "Crate Keys",
       "label": "Crate Keys",
-      "description": "Purchase digital Crate Keys to open loot crates at play.elitemc.net spawns for rare items.",
+      "description": "Purchase digital Crate Keys to open loot crates at play.mineberry.net spawns for rare items.",
       "icon": "Key",
       "enabled": true
     },
@@ -84,7 +84,7 @@
       "categoryId": "ranks",
       "priceINR": 250,
       "priceUSD": 2.99,
-      "description": "An essential starter rank on EliteMC. Includes a bright green [VIP] name tag, /fly in hubs, and exclusive hub gadget permissions.",
+      "description": "An essential starter rank on MineBerry. Includes a bright green [VIP] name tag, /fly in hubs, and exclusive hub gadget permissions.",
       "image": "https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?auto=format&fit=crop&w=400&q=80",
       "featured": false,
       "stock": "In Stock",
@@ -120,7 +120,7 @@
       "categoryId": "ranks",
       "priceINR": 2499,
       "priceUSD": 29.99,
-      "description": "The absolute pinnacle of privilege on EliteMC Sanctuary. Exclusive gold Champion title prefix, dynamic holographic player shadow companion, and full database unlocks.",
+      "description": "The absolute pinnacle of privilege on MineBerry Sanctuary. Exclusive gold Champion title prefix, dynamic holographic player shadow companion, and full database unlocks.",
       "image": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=400&q=80",
       "featured": true,
       "stock": "Limited Volume",
@@ -176,7 +176,7 @@
     },
     {
       "id": "bundle-starter",
-      "name": "EliteMC Starter Bundle",
+      "name": "MineBerry Starter Bundle",
       "categoryId": "bundles",
       "priceINR": 450,
       "priceUSD": 5.49,
@@ -240,7 +240,7 @@
       "categoryId": "tags",
       "priceINR": 99,
       "priceUSD": 1.19,
-      "description": "Show you are an original veteran player of EliteMC. Elegant retro prefix tag.",
+      "description": "Show you are an original veteran player of MineBerry. Elegant retro prefix tag.",
       "image": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80",
       "featured": false,
       "stock": "Unlimited",
@@ -276,7 +276,7 @@
       "categoryId": "claims",
       "priceINR": 199,
       "priceUSD": 2.49,
-      "description": "Keep your builds safe from greifers. Perfect block size expansion for small to medium estates on the play.elitemc.net Sanctuary server.",
+      "description": "Keep your builds safe from greifers. Perfect block size expansion for small to medium estates on the play.mineberry.net Sanctuary server.",
       "image": "https://images.unsplash.com/photo-1513258496099-48168024addd?auto=format&fit=crop&w=400&q=80",
       "featured": false,
       "stock": "In Stock",

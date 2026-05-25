@@ -7,19 +7,19 @@ import {
 
 import { CartItem, PlayerStats, LiveEvent, Product } from './types';
 import { PRODUCTS, CATEGORIES, LIVE_FEED_EVENTS, SITE_CONFIG } from './data';
-import CartModal from './components/CartModal';
-import CheckoutModal from './components/CheckoutModal';
+import UnifiedCheckoutModal from './components/UnifiedCheckoutModal';
+import MineBerryLogo from './components/MineBerryLogo';
 
 const DEFAULT_STATS: PlayerStats = {
-  username: 'NobleGuest',
+  username: '',
   rank: 'None',
   keys: {
-    mythic: 2,
-    ancient: 1,
+    mythic: 0,
+    ancient: 0,
     divine: 0
   },
-  balance: 1500,
-  claimBlocks: 500,
+  balance: 0,
+  claimBlocks: 0,
   unbanPasses: 0,
   purchasedItemsCount: 0
 };
@@ -31,8 +31,6 @@ export default function App() {
   // Set default category select to 'all' to show merged items list!
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
-  const [checkoutUsername, setCheckoutUsername] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   
   // Currency Toggle selection defaults to INR as configured inside store.json
@@ -51,16 +49,10 @@ export default function App() {
   
   // Linked Discord & Mojang States
   const [isDiscordLinked, setIsDiscordLinked] = useState(false);
-  const [isProfileLinked, setIsProfileLinked] = useState(true);
-  const [usernameInput, setUsernameInput] = useState(stats.username);
+  const [isProfileLinked, setIsProfileLinked] = useState(false);
+  const [usernameInput, setUsernameInput] = useState('');
 
-  // Social chat comments
-  const [chatMessage, setChatMessage] = useState('');
-  const [chatFeed, setChatFeed] = useState<Array<{user: string, text: string, time: string, rank?: string}>>([
-    { user: 'EliteGlow', text: 'EliteMC ranks deliver instantly inside the play.elitemc.net server, love it!', time: 'Just now', rank: 'MVP' },
-    { user: 'EliteSupporter', text: 'Just unboxed 5 Divine keys, got awesome custom cosmetics! ⭐', time: '2 min ago', rank: 'ELITE' },
-    { user: 'SanctuaryPlayer', text: 'Does anyone want to team up on the skyblock or factions realm?', time: '5 min ago', rank: 'None' }
-  ]);
+
 
   // Support Ticket Form States
   const [supportName, setSupportName] = useState('');
@@ -70,7 +62,7 @@ export default function App() {
 
   // --- Load and Save State natively in localStorage ---
   useEffect(() => {
-    const cachedStats = localStorage.getItem('elitemc_stats');
+    const cachedStats = localStorage.getItem('mineberry_stats');
     if (cachedStats) {
       try {
         setStats(JSON.parse(cachedStats));
@@ -79,7 +71,7 @@ export default function App() {
       }
     }
 
-    const cachedCart = localStorage.getItem('elitemc_cart');
+    const cachedCart = localStorage.getItem('mineberry_cart');
     if (cachedCart) {
       try {
         setCartItems(JSON.parse(cachedCart));
@@ -91,7 +83,7 @@ export default function App() {
 
   const saveStats = (newStats: PlayerStats) => {
     setStats(newStats);
-    localStorage.setItem('elitemc_stats', JSON.stringify(newStats));
+    localStorage.setItem('mineberry_stats', JSON.stringify(newStats));
   };
 
   const showToast = (msg: string) => {
@@ -112,7 +104,7 @@ export default function App() {
       updated = [...cartItems, { product, quantity: 1 }];
     }
     setCartItems(updated);
-    localStorage.setItem('elitemc_cart', JSON.stringify(updated));
+    localStorage.setItem('mineberry_cart', JSON.stringify(updated));
     showToast(`Added ${product.name} to your shopping cart!`);
   };
 
@@ -128,13 +120,13 @@ export default function App() {
       updated[existingIndex].quantity = newQty;
     }
     setCartItems(updated);
-    localStorage.setItem('elitemc_cart', JSON.stringify(updated));
+    localStorage.setItem('mineberry_cart', JSON.stringify(updated));
   };
 
   const handleRemoveCartItem = (productId: string) => {
     const updated = cartItems.filter(item => item.product.id !== productId);
     setCartItems(updated);
-    localStorage.setItem('elitemc_cart', JSON.stringify(updated));
+    localStorage.setItem('mineberry_cart', JSON.stringify(updated));
   };
 
   // --- Purchase Execution Checkout Simulation ---
@@ -174,7 +166,7 @@ export default function App() {
 
     saveStats(finalStats);
     setCartItems([]);
-    localStorage.removeItem('elitemc_cart');
+    localStorage.removeItem('mineberry_cart');
     setIsCartOpen(false);
 
     // Add purchase event block to the live social feed
@@ -189,7 +181,7 @@ export default function App() {
     };
 
     setEvents([newEvent, ...events]);
-    showToast(`Purchase dynamic dispatch logs updated! Your in-game inventory on play.elitemc.net was synced.`);
+    showToast(`Purchase dynamic dispatch logs updated! Your in-game inventory on play.mineberry.net was synced.`);
   };
 
   // --- Mojang username linking form ---
@@ -202,22 +194,10 @@ export default function App() {
     };
     saveStats(finalStats);
     setIsProfileLinked(true);
-    showToast(`Minecraft character profile '${usernameInput}' synced with play.elitemc.net successfully!`);
+    showToast(`Minecraft character profile '${usernameInput}' synced with play.mineberry.net successfully!`);
   };
 
-  // --- Interactive Chat send ---
-  const handleSendChatMessage = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!chatMessage.trim()) return;
-    const newChat = {
-      user: stats.username,
-      text: chatMessage,
-      time: 'Just now',
-      rank: stats.rank !== 'None' ? stats.rank : 'Player'
-    };
-    setChatFeed([newChat, ...chatFeed]);
-    setChatMessage('');
-  };
+
 
   // --- Interactive Support Ticket Submit ---
   const handleSupportTicket = (e: React.FormEvent) => {
@@ -229,7 +209,7 @@ export default function App() {
       setSupportName('');
       setSupportMessage('');
       setShowTicketModal(false);
-      showToast('Support ticket loaded! An administrator will contact you on play.elitemc.net shortly.');
+      showToast('Support ticket loaded! An administrator will contact you on play.mineberry.net shortly.');
     }, 2000);
   };
 
@@ -272,20 +252,25 @@ export default function App() {
       )}
 
       {/* --- MASTER HEADER NAVBAR --- */}
-      <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-black/80 backdrop-blur-md px-4 sm:px-6 md:px-8 py-3.5 flex items-center justify-between">
+      <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-black/80 backdrop-blur-md px-4 sm:px-6 md:px-8 py-3 flex items-center justify-between">
         
         {/* Logo and Server status indicator */}
-        <div className="flex items-center gap-4 select-none">
-          <div className="flex items-baseline gap-2">
-            <span className="font-extrabold text-lg tracking-wider text-primary-mint uppercase">
-              {SITE_CONFIG.serverName || 'EliteMC'}
-            </span>
-            <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest hidden sm:inline">Sanctuary Store</span>
-          </div>
-          
-          <div className="hidden md:flex items-center gap-1.5 px-2 py-0.5 rounded bg-primary-mint/10 border border-primary-mint/20 text-[9px] text-primary-mint font-extrabold tracking-wide uppercase">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary-mint animate-pulse"></span>
-            {SITE_CONFIG.serverIP || 'play.elitemc.net'}
+        <div className="flex items-center gap-3 select-none">
+          <MineBerryLogo size="sm" showText={false} className="mr-0" />
+          <div className="flex flex-col">
+            <div className="flex items-baseline gap-1 leading-none">
+              <span className="font-extrabold text-[#38bdf8] drop-shadow-[0_0_6px_rgba(56,189,248,0.4)] tracking-wide uppercase font-sans text-sm">
+                Mine
+              </span>
+              <span className="font-extrabold text-[#d946ef] drop-shadow-[0_0_6px_rgba(217,70,239,0.5)] tracking-wide uppercase font-sans text-sm">
+                Berry
+              </span>
+              <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest hidden sm:inline ml-1.5 pt-0.5">Store</span>
+            </div>
+            <div className="flex items-center gap-1 mt-0.5 leading-none">
+              <span className="w-1 h-1 rounded-full bg-[#38bdf8] animate-pulse"></span>
+              <span className="font-mono text-[9px] text-gray-400 font-bold uppercase tracking-wide">{SITE_CONFIG.serverIP || 'play.mineberry.net'}</span>
+            </div>
           </div>
         </div>
 
@@ -320,7 +305,7 @@ export default function App() {
 
           {/* Social connection links */}
           <a 
-            href={SITE_CONFIG.discord || 'https://discord.gg/elitemc'} 
+            href={SITE_CONFIG.discord || 'https://discord.gg/mineberry'} 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-primary-mint transition-colors text-xs font-semibold flex items-center gap-1"
@@ -356,7 +341,7 @@ export default function App() {
             <img 
               alt="Skin face" 
               className="w-6 h-6 object-contain" 
-              src={`https://mc-heads.net/avatar/${stats.username}/32`}
+              src={`https://mc-heads.net/avatar/${stats.username || 'MHF_Alex'}/32`}
               onError={(e) => {
                 e.currentTarget.src = "https://mc-heads.net/avatar/MHF_Alex/32";
               }}
@@ -373,14 +358,15 @@ export default function App() {
           
           {/* Hero Section */}
           <section id="store-hero" className="text-center relative py-6 max-w-2xl mx-auto flex flex-col items-center">
-            <div className="inline-block mb-3 px-3 py-1 rounded-full border border-primary-mint/15 bg-primary-mint/5 text-primary-mint text-[10px] font-black tracking-widest uppercase">
-              🛡️ Official Minecraft Server Sanctuary Store
+            <div className="inline-block mb-5 px-3 py-1 rounded-full border border-secondary-mint/15 bg-[#a855f7]/5 text-secondary-mint text-[10px] font-black tracking-widest uppercase">
+              👑 Official MineBerry Server Sanctuary Store
             </div>
-            <h1 className="text-3xl md:text-5xl font-black text-primary-mint tracking-tighter uppercase mb-2 font-sans text-transparent bg-clip-text bg-gradient-to-r from-primary-mint via-primary-mint to-teal-300">
-              {SITE_CONFIG.serverName || 'EliteMC'}
-            </h1>
-            <p className="text-xs md:text-sm text-text-muted leading-relaxed max-w-lg">
-              Enhance your sanctuary experience with server ranks, crate keys, value bundles, cosmetics, and claim blocks directly delivered inside {SITE_CONFIG.serverIP || 'play.elitemc.net'}.
+            
+            {/* Immersive Large Brand Logo */}
+            <MineBerryLogo size="lg" className="mb-4" />
+
+            <p className="text-xs md:text-sm text-text-muted leading-relaxed max-w-lg mt-3">
+              Enhance your sanctuary experience with server ranks, crate keys, value bundles, cosmetics, and claim blocks directly delivered inside <span className="text-primary-mint font-bold">{SITE_CONFIG.serverIP || 'play.mineberry.net'}</span>.
             </p>
           </section>
 
@@ -498,43 +484,7 @@ export default function App() {
                 })}
               </div>
 
-              {/* Server Social Chat Feed Box */}
-              <div className="p-4 rounded-xl bg-white/5 border border-white/5 flex flex-col gap-3">
-                <span className="block text-[10px] font-bold text-primary-mint uppercase tracking-wider">Lobby Chat Stream</span>
-                
-                <div className="flex flex-col gap-2 max-h-[160px] overflow-y-auto hide-scrollbar text-[11px] pr-1">
-                  {chatFeed.map((ch, i) => (
-                    <div key={i} className="flex flex-col gap-0.5 border-b border-white/5 pb-1.5 last:border-0">
-                      <div className="flex justify-between items-baseline">
-                        <span className="font-mono font-bold text-gray-300 flex items-center gap-1">
-                          {ch.rank && ch.rank !== 'None' && (
-                            <span className="text-[8px] px-1 bg-primary-mint/15 text-primary-mint rounded font-semibold uppercase">{ch.rank}</span>
-                          )}
-                          {ch.user}
-                        </span>
-                        <span className="text-[9px] text-gray-500 font-mono">{ch.time}</span>
-                      </div>
-                      <p className="text-gray-400 leading-snug">{ch.text}</p>
-                    </div>
-                  ))}
-                </div>
 
-                <form onSubmit={handleSendChatMessage} className="flex gap-1.5 mt-1">
-                  <input 
-                    type="text"
-                    value={chatMessage}
-                    onChange={(e) => setChatMessage(e.target.value)}
-                    placeholder="Type in chat..."
-                    className="flex-1 px-2.5 py-1 bg-black rounded border border-white/10 text-xs text-white focus:outline-none focus:border-primary-mint"
-                  />
-                  <button 
-                    type="submit"
-                    className="px-2.5 py-1 bg-primary-mint text-emerald-bg font-bold rounded text-xs hover:bg-white transition-all cursor-pointer"
-                  >
-                    Send
-                  </button>
-                </form>
-              </div>
 
             </aside>
 
@@ -668,15 +618,15 @@ export default function App() {
           <section id="help-banner" className="py-8 px-6 glass-panel rounded-2xl text-center relative overflow-hidden mt-8 max-w-4xl mx-auto w-full">
             <div className="absolute top-0 right-0 w-32 h-32 bg-primary-mint/20 rounded-full translate-x-1/2 opacity-25 blur-3xl"></div>
             
-            <h2 className="text-xl md:text-2xl font-black text-primary-mint tracking-tight uppercase mb-2">
+            <h2 className="text-xl md:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-fuchsia-400 tracking-tight uppercase mb-2">
               Need Billing Support?
             </h2>
             <p className="text-xs md:text-sm text-text-muted mb-6 max-w-sm mx-auto leading-relaxed">
-              Our support team is active 24/7. Ranks and key purchases deliver dynamically into play.elitemc.net server within 5 minutes of payment checkout.
+              Our support team is active 24/7. Ranks and key purchases deliver dynamically into <span className="text-primary-mint font-bold">play.mineberry.net</span> server within 5 minutes of payment checkout.
             </p>
             <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto">
               <a 
-                href={SITE_CONFIG.discord || 'https://discord.gg/elitemc'}
+                href={SITE_CONFIG.discord || 'https://discord.gg/mineberry'}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-white text-xs font-extrabold py-3 rounded-xl transition-all border border-white/5 cursor-pointer"
@@ -703,10 +653,10 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-center md:text-left select-none animate-fade-in">
             <span className="block font-black text-sm tracking-tight text-primary-mint uppercase">
-              {SITE_CONFIG.serverName || 'EliteMC'} Store
+              {SITE_CONFIG.serverName || 'MineBerry'} Store
             </span>
             <p className="mt-1 text-[11px] text-gray-400 leading-relaxed">
-              © 2026 EliteMC. All rights reserved. Server IP: {SITE_CONFIG.serverIP || 'play.elitemc.net'}. We are not associated or affiliated with Mojang Studios, Minecraft, or Microsoft Corporation.
+              © 2026 MineBerry. All rights reserved. Server IP: {SITE_CONFIG.serverIP || 'play.mineberry.net'}. We are not associated or affiliated with Mojang Studios, Minecraft, or Microsoft Corporation.
             </p>
           </div>
           <div className="flex gap-4 font-semibold">
@@ -717,35 +667,21 @@ export default function App() {
         </div>
       </footer>
 
-      {/* --- CART DRAWER/MODAL POPUP --- */}
-      <CartModal 
+      {/* --- SINGLE UNIFIED CHECKOUT MODAL POPUP --- */}
+      <UnifiedCheckoutModal 
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}
         cartItems={cartItems}
         onUpdateQuantity={handleUpdateCartQuantity}
         onRemoveItem={handleRemoveCartItem}
-        onCheckoutSuccess={(usr) => {
-          setCheckoutUsername(usr);
-          setIsCartOpen(false);
-          setIsCheckoutOpen(true);
-        }}
-        defaultUsername={stats.username}
-        currency={currency}
-      />
-
-      {/* --- ADVANCED UPI DUAL-PANE CHECKOUT MODAL --- */}
-      <CheckoutModal 
-        isOpen={isCheckoutOpen}
-        onClose={() => setIsCheckoutOpen(false)}
-        cartItems={cartItems}
-        username={checkoutUsername || stats.username}
         onCheckoutSuccess={handleCheckoutSuccess}
+        currency={currency}
       />
 
       {/* --- INTERACTIVE TICKET MODAL --- */}
       {showTicketModal && (
         <div id="ticket-modal-backdrop" className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl animate-fade-in text-gray-100">
-          <div className="w-full max-w-md rounded-xl bg-[#090e0c] p-6 border border-primary-mint/25 flex flex-col gap-4 relative">
+          <div className="w-full max-w-md rounded-xl bg-emerald-surface p-6 border border-secondary-mint/25 flex flex-col gap-4 relative">
             <div className="flex justify-between items-center">
               <h3 className="text-sm font-bold text-primary-mint tracking-tight flex items-center gap-1.5 uppercase font-sans">
                 <Ticket size={18} />
@@ -767,7 +703,7 @@ export default function App() {
                   required
                   value={supportName}
                   onChange={(e) => setSupportName(e.target.value)}
-                  placeholder="e.g. ElitePlayer"
+                  placeholder="e.g. BerryPlayer"
                   className="px-3 py-1.5 bg-black rounded border border-white/10 text-xs focus:outline-none focus:border-primary-mint text-white"
                 />
               </div>

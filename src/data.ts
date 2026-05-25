@@ -41,10 +41,4 @@ export const PRODUCTS: Product[] = storeData.products.map(p => ({
     : ['Dynamic keys integration', 'Interactive visual crate spawn animations', 'Immediate activation key logs']
 }));
 
-export const LIVE_FEED_EVENTS: LiveEvent[] = [
-  { id: 'ev-1', player: 'EliteAlex_99', action: 'purchased', item: 'CHAMPION Rank', time: 'Just now' },
-  { id: 'ev-2', player: 'CosmosNite', action: 'purchased', item: 'EliteMC Starter Bundle', time: '3 min ago' },
-  { id: 'ev-3', player: 'NoblePlayer', action: 'purchased', item: 'Divine Crate Key', time: '7 min ago' },
-  { id: 'ev-4', player: 'RankMaster_X', action: 'purchased', item: 'Angelic Neon Wings', time: '14 min ago' },
-  { id: 'ev-5', player: 'Lunaluxe', action: 'purchased', item: '3x Ancient Crate Key', time: '21 min ago' }
-];
+export const LIVE_FEED_EVENTS: LiveEvent[] = [];
