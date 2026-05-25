@@ -1,10 +1,7 @@
-// Secure backend serverless function tailored for Vercel deployment
-// Protects the Discord Webhook URL from the client browser and formats the Discord Embed
-// Dispatches premium invoice reciept emails seamlessly with nodemailer
-
+import { Request, Response } from 'express';
 import nodemailer from 'nodemailer';
 
-export default async function handler(req, res) {
+export default async function handler(req: Request, res: Response) {
   // Allow only POST requests
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, error: 'Method Not Allowed' });
@@ -40,8 +37,8 @@ export default async function handler(req, res) {
     }
 
     const isINR = currency === 'INR';
-    const totalUSD = cartItems.reduce((sum, item) => sum + (item.product.priceUSD || 0) * item.quantity, 0);
-    const totalINR = cartItems.reduce((sum, item) => sum + (item.product.priceINR || 0) * item.quantity, 0);
+    const totalUSD = cartItems.reduce((sum: number, item: any) => sum + (item.product.priceUSD || 0) * item.quantity, 0);
+    const totalINR = cartItems.reduce((sum: number, item: any) => sum + (item.product.priceINR || 0) * item.quantity, 0);
     
     const currencySymbol = isINR ? '₹' : '$';
     const orderSumTotal = `${currencySymbol}${isINR ? totalINR : totalUSD.toFixed(2)} ${currency}`;
@@ -52,14 +49,14 @@ export default async function handler(req, res) {
 
     if (webhookUrl) {
       const itemsListText = cartItems.map(
-        item => `• **${item.product.name}** x${item.quantity} (${isINR ? `₹${item.product.priceINR}` : `$${item.product.priceUSD}`} each)`
+        (item: any) => `• **${item.product.name}** x${item.quantity} (${isINR ? `₹${item.product.priceINR}` : `$${item.product.priceUSD}`} each)`
       ).join('\n');
 
       const cleanDiscordUser = discordUsername.replace(/[*`_~|>@#:&]/g, '');
 
       const discordEmbed = {
         title: '👑 New MineBerry Premium Order Settle Hub',
-        description: 'A custom transaction has been verified and dispatched dynamically.',
+        description: 'A custom high-performance checkout ticket has been automatically completed by the customer.',
         color: playerType === 'Java' ? 3718648 : 14254255, // Cyan (#38bdf8) or fuchsia (#d946ef)
         fields: [
           { name: '🆔 Order / Cart ID', value: `\`${cartId}\``, inline: true },
@@ -78,7 +75,7 @@ export default async function handler(req, res) {
           url: `https://mc-heads.net/avatar/${encodeURIComponent(ign)}/128`
         },
         footer: {
-          text: 'MineBerry Dynamic Sanctuary Store Engine • Vercel Handler'
+          text: 'MineBerry Dynamic Sanctuary Store Engine • Unified Complete'
         },
         timestamp: timestamp
       };
@@ -95,12 +92,16 @@ export default async function handler(req, res) {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
-        if (discordResponse.ok) discordSuccess = true;
+        if (discordResponse.ok) {
+          discordSuccess = true;
+        } else {
+          console.error('Discord webhook rejected payload:', await discordResponse.text());
+        }
       } catch (err) {
         console.error('Failed to trigger Discord webhook:', err);
       }
     } else {
-      console.warn('DISCORD_WEBHOOK_URL is not set. Skipping Discord notification.');
+      console.warn('DISCORD_WEBHOOK_URL is not defined. Skipping Discord notification block.');
     }
 
     // --- Action B: Email receipt copy dispatch with nodemailer ---
@@ -109,6 +110,7 @@ export default async function handler(req, res) {
     let emailSuccess = false;
 
     if (gmailUser && gmailAppPassword) {
+      // Create transporter
       const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -117,7 +119,8 @@ export default async function handler(req, res) {
         },
       });
 
-      const itemsHtml = cartItems.map(item => `
+      // Construct beautifully styled HTML card mirroring MineBerry's premium storefront look
+      const itemsHtml = cartItems.map((item: any) => `
         <tr style="border-bottom: 1px solid #1a2e2e;">
           <td style="padding: 12px 6px; font-size: 13px; color: #ffffff;">
             <strong>${item.product.name}</strong> <span style="color: #a3a3a3; font-size: 11px;">x${item.quantity}</span>
@@ -154,7 +157,7 @@ export default async function handler(req, res) {
                     </td>
                   </tr>
 
-                  <!-- Accent bar divider -->
+                  <!-- Left accent color divider simulation -->
                   <tr>
                     <td height="4" style="background-color: ${accentColor};"></td>
                   </tr>
@@ -169,7 +172,7 @@ export default async function handler(req, res) {
                     </td>
                   </tr>
 
-                  <!-- Details Grid -->
+                  <!-- Details Grid (Styled cards inside email) -->
                   <tr>
                     <td style="padding: 0 32px;">
                       <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #050b0b; border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; margin-bottom: 24px;">
@@ -223,10 +226,11 @@ export default async function handler(req, res) {
                     </td>
                   </tr>
 
-                  <!-- Items Table -->
+                  <!-- Items Table details -->
                   <tr>
                     <td style="padding: 0 32px 24px 32px;">
                       <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;">
+                        <!-- Table header -->
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); background-color: #050b0b;">
                           <th align="left" style="padding: 8px 6px; font-size: 11px; text-transform: uppercase; color: #a3a3a3; font-weight: bold;">Product Details</th>
                           <th align="right" style="padding: 8px 6px; font-size: 11px; text-transform: uppercase; color: #a3a3a3; font-weight: bold;">Price</th>
@@ -236,7 +240,7 @@ export default async function handler(req, res) {
                     </td>
                   </tr>
 
-                  <!-- Summary container -->
+                  <!-- Summary banner -->
                   <tr>
                     <td style="padding: 0 32px 32px 32px;">
                       <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: rgba(52, 211, 153, 0.05); border: 1px solid rgba(52, 211, 153, 0.2); border-radius: 12px; padding: 16px;">
@@ -253,7 +257,7 @@ export default async function handler(req, res) {
                     </td>
                   </tr>
 
-                  <!-- Footer -->
+                  <!-- Footer Notes -->
                   <tr>
                     <td style="background-color: #0c1c1c; padding: 20px 32px; font-size: 11px; color: #737373; text-align: center; border-top: 1px solid #1a2e2e; line-height: 1.4;">
                       <p style="margin: 0 0 4px 0;">All digital goods and keys deliver instantly in game play. Connecting client to <strong>play.mineberry.net</strong> initiates system activation.</p>
@@ -280,11 +284,12 @@ export default async function handler(req, res) {
           html: htmlBody,
         });
         emailSuccess = true;
+        console.log(`Successfully dispatched order confirmation email to ${email.trim()}`);
       } catch (err) {
-        console.error('Nodemailer JS email dispatch failed:', err);
+        console.error('Nodemailer failed to deliver email:', err);
       }
     } else {
-      console.warn('GMAIL_USER and GMAIL_APP_PASSWORD not configured. Skipping email receipt dispatch.');
+      console.warn('GMAIL_USER and GMAIL_APP_PASSWORD are not fully configured. Skipping email dispatching.');
     }
 
     return res.status(200).json({ 
@@ -294,7 +299,7 @@ export default async function handler(req, res) {
       discordDispatched: webhookUrl ? discordSuccess : false,
       emailDispatched: (gmailUser && gmailAppPassword) ? emailSuccess : false
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Unified Checkout serverless function error:', error);
     return res.status(500).json({ 
       success: false, 

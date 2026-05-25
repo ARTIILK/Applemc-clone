@@ -84,6 +84,7 @@ export default function UnifiedCheckoutModal({
   // Download official receipt logic
   const handleDownloadInvoiceJson = () => {
     const invoicePayload = {
+      developerCredit: "Engine Built & Maintained by aurtx | Discord: aurtx_99102 (<@1459859699624186053>) | Contact: prince2020me1@gmail.com",
       checkoutReceipt: {
         cartId: generatedCartId,
         timestamp: generatedTimestamp,
@@ -745,6 +746,11 @@ export default function UnifiedCheckoutModal({
 
           </div>
         )}
+        <div className="bg-black/60 border-t border-white/10 py-3.5 px-6 text-center z-10 select-all">
+          <span className="text-[9px] sm:text-[10px] text-gray-400 font-bold leading-normal">
+            Engine Built & Maintained by aurtx | Discord: aurtx_99102 (&lt;@1459859699624186053&gt;) | Contact: prince2020me1@gmail.com
+          </span>
+        </div>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import path from 'path';
 import { createServer as createViteServer } from 'vite';
 import dotenv from 'dotenv';
 import checkoutHandler from './api/checkout';
+import sendOrderHandler from './api/send-order';
 
 // Load environment variables
 dotenv.config();
@@ -26,7 +27,7 @@ async function startServer() {
 
   app.post('/api/send-order', async (req, res) => {
     try {
-      await checkoutHandler(req as any, res as any);
+      await sendOrderHandler(req as any, res as any);
     } catch (err) {
       console.error('API send-order execution error:', err);
       res.status(500).json({ success: false, error: 'Internal API route error.' });

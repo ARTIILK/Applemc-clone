@@ -658,6 +658,9 @@ export default function App() {
             <p className="mt-1 text-[11px] text-gray-400 leading-relaxed">
               © 2026 MineBerry. All rights reserved. Server IP: {SITE_CONFIG.serverIP || 'play.mineberry.net'}. We are not associated or affiliated with Mojang Studios, Minecraft, or Microsoft Corporation.
             </p>
+            <p className="mt-3 text-[11px] text-[#38bdf8] font-semibold border-t border-white/5 pt-3">
+              Engine Built & Maintained by aurtx | Discord: aurtx_99102 (&lt;@1459859699624186053&gt;) | Contact: prince2020me1@gmail.com
+            </p>
           </div>
           <div className="flex gap-4 font-semibold">
             <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-primary-mint transition-colors cursor-pointer">Catalog Products</button>
@@ -727,6 +730,11 @@ export default function App() {
                 {ticketSuccess ? 'SUBMITTED! REDIRECTING...' : 'Submit Support Ticket'}
               </button>
             </form>
+            <div className="border-t border-white/5 pt-3 mt-1.5 text-center">
+              <span className="text-[9px] text-gray-400 leading-snug">
+                Engine Built & Maintained by aurtx | Discord: aurtx_99102 (&lt;@1459859699624186053&gt;) | Contact: prince2020me1@gmail.com
+              </span>
+            </div>
           </div>
         </div>
       )}
